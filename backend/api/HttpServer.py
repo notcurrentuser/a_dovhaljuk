@@ -4,12 +4,14 @@ from threading import Thread
 import tornado.web
 
 from RequestHandlers import PrivateKeyGenerationHandler, PrivateKeySignHandler
+from RequestHandlers import MessagesSendHandler
 
 
 class WebServer(tornado.web.Application):
     def __init__(self):
         handlers = [(r"/private_key/generation/", PrivateKeyGenerationHandler.PrivateKeyGenerationHandler),
-                    (r"/private_key/sign/", PrivateKeySignHandler.PrivateKeySignHandler)]
+                    (r"/private_key/sign/", PrivateKeySignHandler.PrivateKeySignHandler),
+                    (r"/message/send/", MessagesSendHandler.MessageSendHandler)]
         settings = {'debug': True}
         super().__init__(handlers, **settings)
 

@@ -44,6 +44,6 @@ class PrivateKeyGenerationHandler(tornado.web.RequestHandler):
 
         try:
             self.write({'encrypted_pem_private_key': base64.b64encode(encrypted_pem_private_key).decode('utf-8'),
-                        'pem_public_key': pem_public_key.decode()})
+                        'pem_public_key': base64.b64encode(pem_public_key).decode('utf-8')})
         except Exception as e:
             raise tornado.web.HTTPError(status_code=500, log_message=str(e))
