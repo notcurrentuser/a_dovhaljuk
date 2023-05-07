@@ -15,7 +15,7 @@ class MessageSendHandler(tornado.web.RequestHandler):
         message_hash = sha256(message.encode()).hexdigest()
 
         try:
-            save_message(message)
+            save_message('message', message_hash, message)
             self.write({'message_hash': message_hash})
         except Exception as e:
             raise tornado.web.HTTPError(status_code=500, log_message=str(e))
