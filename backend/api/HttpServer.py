@@ -4,7 +4,7 @@ from threading import Thread
 import tornado.web
 
 from RequestHandlers import PrivateKeyGenerationHandler, PrivateKeySignHandler
-from RequestHandlers import MessagesSendHandler
+from RequestHandlers import MessagesSendHandler, MessagesGetHandler
 from RequestHandlers import MessagesHashSendHandler, MessagesHashGetHandler
 
 
@@ -14,6 +14,7 @@ class WebServer(tornado.web.Application):
             (r"/private_key/generation/", PrivateKeyGenerationHandler.PrivateKeyGenerationHandler),
             (r"/private_key/sign/", PrivateKeySignHandler.PrivateKeySignHandler),
             (r"/message/send/", MessagesSendHandler.MessageSendHandler),
+            (r"/message/get/", MessagesGetHandler.MessagesGetHandler),
             (r"/message_hash/send/", MessagesHashSendHandler.MessagesHashSendHandler),
             (r"/message_hash/get/", MessagesHashGetHandler.MessagesHashGetHandler),
             ]
