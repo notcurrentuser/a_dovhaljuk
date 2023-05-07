@@ -1,3 +1,4 @@
+import time
 from hashlib import sha256
 
 import tornado.web
@@ -11,8 +12,10 @@ class MessagesHashSendHandler(tornado.web.RequestHandler):
 
         message_hash_hash = sha256(message_hash.encode()).hexdigest()
 
+        data = {'datetime': time.time(), 'message_hash': message_hash}
+
         try:
-            save_message('message_hash', message_hash_hash, message_hash)
+            save_message('message_hash', message_hash_hash, data)
             self.write({'message_hash_hash': message_hash_hash})
         except Exception as e:
             raise tornado.web.HTTPError(status_code=500, log_message=str(e))

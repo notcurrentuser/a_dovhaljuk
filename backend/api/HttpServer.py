@@ -5,7 +5,7 @@ import tornado.web
 
 from RequestHandlers import PrivateKeyGenerationHandler, PrivateKeySignHandler
 from RequestHandlers import MessagesSendHandler
-from RequestHandlers import MessagesHashSendHandler
+from RequestHandlers import MessagesHashSendHandler, MessagesHashGetHandler
 
 
 class WebServer(tornado.web.Application):
@@ -15,6 +15,7 @@ class WebServer(tornado.web.Application):
             (r"/private_key/sign/", PrivateKeySignHandler.PrivateKeySignHandler),
             (r"/message/send/", MessagesSendHandler.MessageSendHandler),
             (r"/message_hash/send/", MessagesHashSendHandler.MessagesHashSendHandler),
+            (r"/message_hash/get/", MessagesHashGetHandler.MessagesHashGetHandler),
             ]
         settings = {'debug': True}
         super().__init__(handlers, **settings)
