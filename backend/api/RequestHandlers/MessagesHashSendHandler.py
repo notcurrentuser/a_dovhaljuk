@@ -1,5 +1,5 @@
-import time
 import pickle
+from time import time
 from hashlib import sha256
 
 import tornado.web
@@ -13,10 +13,11 @@ class MessagesHashSendHandler(tornado.web.RequestHandler):
         message_hash = self.get_argument('message_hash', default=None, strip=False)
 
         message_hash_hash = sha256(message_hash.encode()).hexdigest()
+
         last_item = pickle.dumps(list(get_messages('message_hash', last=1).items())[0])
         prev_message_hash = sha256(last_item).hexdigest()
 
-        data = {'datetime': time.time(), 'message_hash': message_hash, 'prev_message_hash': prev_message_hash}
+        data = {'datetime': time(), 'message_hash': message_hash, 'prev_message_hash': prev_message_hash}
 
         try:
             save_message('message_hash', message_hash_hash, data)
