@@ -14,8 +14,11 @@ class MessagesHashSendHandler(tornado.web.RequestHandler):
 
         message_hash_hash = sha256(message_hash.encode()).hexdigest()
 
-        last_item = pickle.dumps(list(get_messages('message_hash', last=1).items())[0])
-        prev_message_hash = sha256(last_item).hexdigest()
+        try:
+            last_item = pickle.dumps(list(get_messages('message_hash', last=1).items())[0])
+            prev_message_hash = sha256(last_item).hexdigest()
+        except AttributeError:
+            prev_message_hash = 'hello world'
 
         data = {'datetime': time(), 'message_hash': message_hash, 'prev_message_hash': prev_message_hash}
 

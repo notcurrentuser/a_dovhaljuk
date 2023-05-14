@@ -4,11 +4,14 @@ import flet as ft
 
 def pem(page, password):
     try:
-        pems = requests.post('http://localhost:5465/private_key/generation/', {'password_phrase': password}).json()
+        pems = requests.post('http://localhost:5465/private_key/generation/', {'password_phrase': password.value}).json()
         page.splash = None
         page.update()
         encrypted_private_key = pems['encrypted_pem_private_key']
         public_key = pems['pem_public_key']
+
+        page.session.set('encrypted_private_key', encrypted_private_key)
+
         page.add(ft.Text('encrypted_private_key'))
         page.add(ft.Text(encrypted_private_key))
         page.add(ft.Text("pem_public_key"))

@@ -1,6 +1,6 @@
 import flet as ft
 
-from pages import messages, get_pem, get_message, pem
+from pages import messages, get_pem, get_message, pem, post_messages
 from addons import window_prevent_close_event
 
 
@@ -13,6 +13,7 @@ def page_manager(page_func):
             [
                 ft.ElevatedButton("Home", on_click=lambda _: messages_page(page, _), col={"md": 4}),
                 ft.ElevatedButton("Registration", on_click=lambda _: get_pem_page(page, _), col={"md": 4}),
+                ft.ElevatedButton("Post", on_click=lambda _: post_message_page(page, _), col={"md": 4}),
             ],
             run_spacing={"xs": 10}
         ))
@@ -39,6 +40,11 @@ def get_message_page(page, message_key):
 @page_manager
 def messages_page(page, _):
     messages(page, redirect=get_message_page)
+
+
+@page_manager
+def post_message_page(page, _):
+    post_messages(page)
 
 
 def start_up(page):
