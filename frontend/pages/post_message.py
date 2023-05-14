@@ -22,9 +22,6 @@ def post_messages(page):
                                                  'message': message_field.value,
                                              }).json()['message_hash']
 
-                a = password_field.value
-                b = page.session.get('encrypted_private_key')
-
                 message_hash_sign = requests.post('http://localhost:5465/private_key/sign/',
                                                   data={
                                                       'password_phrase': password_field.value,
@@ -39,6 +36,6 @@ def post_messages(page):
                               })
 
             except ConnectionError:
-                ...
+                ft.Text('Error post message')
 
     page.add(message_field, password_field, ft.ElevatedButton("Post", on_click=post))
