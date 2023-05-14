@@ -38,7 +38,8 @@ def post_message(page, default_message_key=None):
 
                 requests.post('http://localhost:5465/message_hash/send/',
                               data={
-                                  'message_hash': message_hash_sign,
+                                  'message_hash': message_hash,
+                                  'message_hash_hash': message_hash_sign,
                               })
 
             except ConnectionError:
