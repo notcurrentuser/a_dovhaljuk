@@ -1,6 +1,6 @@
 import flet as ft
 
-from pages import messages, auth_key, get_message, pem, post_messages
+from pages import messages, auth_key, get_message, pem, post_message
 from addons import window_prevent_close_event
 
 
@@ -41,13 +41,12 @@ def get_message_page(page, message_key):
 
 @page_manager
 def messages_page(page, _):
-    post_messages(page)
-    messages(page, redirect=get_message_page)
+    messages(page, redirect=get_message_page, edit_page=post_message_page)
 
 
 @page_manager
-def post_message_page(page, _):
-    post_messages(page)
+def post_message_page(page, default_message):
+    post_message(page, default_message)
 
 
 def start_up(page):

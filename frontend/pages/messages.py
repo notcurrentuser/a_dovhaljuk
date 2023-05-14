@@ -2,10 +2,13 @@ import requests
 import flet as ft
 
 
-def messages(page, redirect):
+def messages(page, redirect, edit_page):
     def get_message(e):
         redirect(page, e.control.key)
 
+    def edit_message(e):
+        print(e.control.key)
+        edit_page(page, e.control.key)
 
     lv = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
 
@@ -25,8 +28,10 @@ def messages(page, redirect):
                                 on_click=get_message
                             ),
                             ft.Row(
-                                [ft.TextButton("Delete"),
-                                 ft.TextButton("Edit")],
+                                [
+                                    ft.TextButton("Edit", on_click=edit_message, key=message_key),
+                                    ft.TextButton("Delete"),
+                                ],
                                 alignment=ft.MainAxisAlignment.END,
                             ),
                         ]

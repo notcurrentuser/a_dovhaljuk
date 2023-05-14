@@ -2,8 +2,14 @@ import flet as ft
 import requests
 
 
-def post_messages(page):
-    message_field = ft.TextField(label="Your message")
+def post_message(page, default_message_key=None):
+    try:
+        print(requests.get(f'http://localhost:5465/message/get/?hash_id={default_message_key}'))
+        default_message = requests.get(f'http://localhost:5465/message/get/?hash_id={default_message_key}').json()['message']
+    except Exception as e:
+        default_message = None
+        print(e)
+    message_field = ft.TextField(label="Your message", value=default_message)
     password_field = ft.TextField(label="Your password")
 
     def post(e):
