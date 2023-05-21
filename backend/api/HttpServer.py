@@ -1,4 +1,5 @@
 import asyncio
+import os
 from threading import Thread
 
 import tornado.web
@@ -22,8 +23,8 @@ class WebServer(tornado.web.Application):
         settings = {'debug': True}
         super().__init__(handlers, **settings)
 
-    def run(self, port=5465):
-        self.listen(port)
+    def run(self):
+        self.listen(int(os.environ.get("PORT", 5000)))
         tornado.ioloop.IOLoop.instance().start()
 
 

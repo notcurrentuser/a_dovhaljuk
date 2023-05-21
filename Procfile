@@ -1,1 +1,1 @@
-worker: python backend/api/HttpServer.py
+web: python backend/api/HttpServer.py
