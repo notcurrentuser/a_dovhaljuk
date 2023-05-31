@@ -1,11 +1,10 @@
 import asyncio
-import os
 from threading import Thread
 
 import tornado.web
 
 from RequestHandlers import PrivateKeyGenerationHandler, PrivateKeySignHandler
-from RequestHandlers import MessagesSendHandler, MessagesGetHandler, MessageDeleteHandler
+from RequestHandlers import MessagesSendHandler, MessagesGetHandler
 from RequestHandlers import MessagesHashSendHandler, MessagesHashGetHandler
 
 
@@ -18,13 +17,13 @@ class WebServer(tornado.web.Application):
             (r"/message/get/", MessagesGetHandler.MessagesGetHandler),
             (r"/message_hash/send/", MessagesHashSendHandler.MessagesHashSendHandler),
             (r"/message_hash/get/", MessagesHashGetHandler.MessagesHashGetHandler),
-            (r"/message/delete/", MessageDeleteHandler.MessageDeleteHandler),
         ]
         settings = {'debug': True}
         super().__init__(handlers, **settings)
 
     def run(self):
-        self.listen(int(os.environ.get("PORT", 5000)))
+        # self.listen(int(os.environ.get("PORT", 5000))) #  for heroku
+        self.listen(5465)  # for localhost
         tornado.ioloop.IOLoop.instance().start()
 
 

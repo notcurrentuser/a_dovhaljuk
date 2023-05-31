@@ -3,11 +3,13 @@ from hashlib import sha256
 
 import tornado.web
 
-from backend.firebase_provider.save_message import save_message
+from backend.firebase_provider.save_message import SaveMessage
 
 
 class MessageSendHandler(tornado.web.RequestHandler):
     async def post(self):
+        save_message = SaveMessage
+
         message = self.get_argument('message', default=None, strip=False)
         images = self.request.files
 
@@ -23,7 +25,7 @@ class MessageSendHandler(tornado.web.RequestHandler):
                 }
 
         try:
-            save_message('message', message_hash, data)
+            save_message.save_message('message', message_hash, data)
             self.write({'message_hash': message_hash})
         except Exception as e:
             raise tornado.web.HTTPError(status_code=500, log_message=str(e))
