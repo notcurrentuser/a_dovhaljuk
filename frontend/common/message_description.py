@@ -1,4 +1,4 @@
-def message_description_formate(message_description: list) -> str:
+def message_description_formate(message_description: list | None) -> str:
     if not message_description or type(message_description) is not list:
         message_description = '#HaltStore'
     else:

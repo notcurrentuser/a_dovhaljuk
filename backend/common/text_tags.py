@@ -5,7 +5,7 @@ from nltk import word_tokenize, Text, download
 
 class TextTags:
     @staticmethod
-    def __stopword_create():
+    def _stopword_create():
         try:
             en_stopwords = stopwords.words('english')
         except LookupError:
@@ -23,7 +23,7 @@ class TextTags:
             download('punkt')
             tokens = word_tokenize(text)
 
-        text_tokens = [token.strip() for token in tokens if token not in self.__stopword_create()]
+        text_tokens = [token.strip() for token in tokens if token not in self._stopword_create()]
         text = Text(text_tokens)
         f_dist_sw = FreqDist(text)
 
