@@ -20,8 +20,10 @@ def auth_key(page, redirect):
                     page.update()
 
                     encrypted_private_key = pems['encrypted_pem_private_key']
+                    public_key = pems['pem_public_key']
 
                     page.session.set('encrypted_private_key', encrypted_private_key)
+                    page.session.set('public_key', public_key)
 
                 redirect(page, None)
             except requests.exceptions.ConnectionError:
@@ -33,4 +35,4 @@ def auth_key(page, redirect):
             password_field.error_text = "Please enter your password"
             page.update()
 
-    page.add(password_field, key_field, ft.ElevatedButton("Generation keys", on_click=check_password))
+    page.add(password_field, key_field, ft.ElevatedButton("Submit", on_click=check_password))

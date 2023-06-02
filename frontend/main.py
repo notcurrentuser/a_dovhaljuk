@@ -1,6 +1,6 @@
 import flet as ft
 
-from pages import messages, auth_key, get_message, pem, post_message
+from pages import messages, auth_key, get_message, pem, post_message, search_message
 from addons import window_prevent_close_event
 
 
@@ -11,12 +11,13 @@ def page_manager(page_func):
         page.clean()
         menu = ft.ResponsiveRow(
             [
-                ft.ElevatedButton("Home", on_click=lambda _: messages_page(page, _), col={"md": 4}),
+                ft.ElevatedButton("Home", on_click=lambda _: messages_page(page, _), col={"md": 3}),
                 ft.ElevatedButton("Profile", on_click=lambda _: auth_page(page, _) if not page.session.get(
-                    'encrypted_private_key') else pem_page(page, _), col={"md": 4}),
-                ft.ElevatedButton("Post", on_click=lambda _: post_message_page(page, _), col={"md": 4}),
+                    'encrypted_private_key') else pem_page(page, _), col={"md": 3}),
+                ft.ElevatedButton("Post", on_click=lambda _: post_message_page(page, _), col={"md": 3}),
+                ft.ElevatedButton("Search", on_click=lambda _: search_message_page(page, _), col={"md": 3}),
             ],
-            run_spacing={"xs": 10}
+            run_spacing={"xs": 14}
         )
         page.add(menu)
         page_func(*args, **kwargs)
@@ -26,7 +27,7 @@ def page_manager(page_func):
 
 @page_manager
 def pem_page(page, _):
-    pem(page)
+    pem(page, redirect=messages_page)
 
 
 @page_manager
@@ -47,6 +48,11 @@ def messages_page(page, _):
 @page_manager
 def post_message_page(page, default_message):
     post_message(page, default_message)
+
+
+@page_manager
+def search_message_page(page, _):
+    search_message(page, get_message_page)
 
 
 def start_up(page):

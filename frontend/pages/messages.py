@@ -30,7 +30,6 @@ def messages(page, redirect, edit_page):
                             ft.Row(
                                 [
                                     ft.TextButton("Edit", on_click=edit_message, key=message_key),
-                                    ft.TextButton("Delete"),
                                 ],
                                 alignment=ft.MainAxisAlignment.END,
                             ),
