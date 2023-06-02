@@ -63,10 +63,11 @@ def post_message(page, redirect, default_message_key=None):
         if message_field.value and password_field.value:
             try:
                 print(file_field.selected_files)
+                files = {f'file{i}': open(value,'rb') for i, value in enumerate(file_field.selected_files)}
                 message_hash = requests.post('http://localhost:5465/message/send/',
-                                             data={
-                                                 'message': message_field.value,
-                                             }).json()['message_hash']
+                                             data={'message': message_field.value},
+                                             files=files
+                                             ).json()['message_hash']
 
                 message_hash_sign = requests.post('http://localhost:5465/private_key/sign/',
                                                   data={
