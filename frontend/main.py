@@ -47,7 +47,7 @@ def messages_page(page, _):
 
 @page_manager
 def post_message_page(page, default_message):
-    post_message(page, default_message)
+    post_message(page, redirect=get_message_page, default_message_key=default_message)
 
 
 @page_manager
