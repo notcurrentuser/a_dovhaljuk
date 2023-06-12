@@ -20,10 +20,6 @@ class PrivateKeyGenerationHandler(tornado.web.RequestHandler):
         pass
 
     async def post(self):
-        # fakes_data = [faker.aba(), faker.address(), faker.ascii_safe_email(), faker.company(),
-        #               faker.phone_number(), faker.user_name(), faker.color_name(), faker.city(), faker.job()]
-        # phrase = random.choice(fakes_data) + " " + random.choice(fakes_data)
-
         password_phrase = self.get_argument('password_phrase', default=None, strip=False)
 
         private_key = rsa.generate_private_key(

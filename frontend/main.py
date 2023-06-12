@@ -1,7 +1,7 @@
 import flet as ft
 
-from pages import messages, auth_key, get_message, pem, post_message, search_message
-from addons import window_prevent_close_event
+from .pages import messages, auth_key, get_message, pem, post_message, search_message
+from .addons import window_prevent_close_event
 
 
 def page_manager(page_func):
@@ -61,4 +61,9 @@ def start_up(page):
     messages_page(page, None)
 
 
-ft.app(target=start_up, )
+def run_client():
+    ft.app(target=start_up, view=ft.WEB_BROWSER)
+
+
+if __name__ == '__main__':
+    run_client()

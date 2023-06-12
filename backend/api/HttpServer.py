@@ -3,9 +3,9 @@ from threading import Thread
 
 import tornado.web
 
-from RequestHandlers import PrivateKeyGenerationHandler, PrivateKeySignHandler
-from RequestHandlers import MessagesSendHandler, MessagesGetHandler
-from RequestHandlers import MessagesHashSendHandler, MessagesHashGetHandler
+from .RequestHandlers import PrivateKeyGenerationHandler, PrivateKeySignHandler
+from .RequestHandlers import MessagesSendHandler, MessagesGetHandler
+from .RequestHandlers import MessagesHashSendHandler, MessagesHashGetHandler
 
 
 class WebServer(tornado.web.Application):
@@ -35,7 +35,12 @@ def start_server():
     web_server.run()
 
 
-thread = Thread(target=start_server, args=())
-thread.daemon = True
-thread.start()
-thread.join()
+def run_server():
+    thread = Thread(target=start_server, args=())
+    thread.daemon = True
+    thread.start()
+    thread.join()
+
+
+if __name__ == '__main__':
+    run_server()
