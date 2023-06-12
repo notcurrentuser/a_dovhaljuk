@@ -1,3 +1,3 @@
-from backend.api.HttpServer import run_server
+from .api.HttpServer import run_server
 
 run_server()
