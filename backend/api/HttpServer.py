@@ -23,7 +23,8 @@ class WebServer(tornado.web.Application):
 
     def run(self):
         # self.listen(int(os.environ.get("PORT", 5000))) #  for heroku
-        self.listen(5465)  # for localhost
+        # self.listen(5465)  # for localhost
+        self.listen(80)  # for azure
         tornado.ioloop.IOLoop.instance().start()
 
 
